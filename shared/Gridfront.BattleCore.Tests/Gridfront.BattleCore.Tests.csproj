@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Gridfront.BattleCore.csproj" />
+    <ProjectReference Include="..\com.wexoy1n.gridfront.battle-core\dotnet~\Gridfront.BattleCore.csproj" />
   </ItemGroup>
 
 </Project>

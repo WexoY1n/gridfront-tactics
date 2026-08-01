@@ -55,12 +55,12 @@ Rules:
 shared/com.wexoy1n.gridfront.battle-core/
 ├─ package.json
 ├─ Runtime/                 # Unity asmdef, noEngineReferences
-└─ dotnet/
+└─ dotnet~/
    └─ Gridfront.BattleCore.csproj   # Compile Include="../Runtime/**/*.cs"
 ```
 
 - Unity：`Packages/manifest.json` 本地 `file:` 引用  
-- Server：`ProjectReference` 指向 `dotnet/*.csproj`  
+- Server：`ProjectReference` 指向 `dotnet~/*.csproj`  
 - 禁止复制两份战斗逻辑；避免 Windows symlink 作为共享方案  
 
 ## Fixed tick pipeline
