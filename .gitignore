@@ -1,0 +1,87 @@
+# OS
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+
+# IDE / editors
+.vs/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# .NET
+bin/
+obj/
+*.DotSettings.user
+TestResults/
+coverage/
+*.coverage
+*.coveragexml
+
+# Secrets / local overrides
+.env
+.env.*
+!.env.example
+*.pem
+*.pfx
+appsettings.*.local.json
+secrets.json
+
+# Unity
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Uu]serSettings/
+[Mm]emoryCaptures/
+[Rr]ecordings/
+*[Oo]bj/
+ExportedObj/
+.consulo/
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+*.pidb.meta
+*.pdb.meta
+*.mdb.meta
+sysinfo.txt
+crashlytics-buildid.txt
+*.apk
+*.aab
+*.app
+*.unitypackage
+InitTestScene*.unity*
+
+# Keep explicit .NET project files outside Unity-generated roots
+!server/**/*.sln
+!server/**/*.csproj
+!shared/**/*.csproj
+!shared/**/*.sln
+
+# Docker / local data
+docker-data/
+*.log
+
+# Media scratch (keep docs/media placeholders)
+*.psd
+*.blend
+*.blend1

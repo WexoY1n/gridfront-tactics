@@ -1,0 +1,58 @@
+name: dotnet-ci
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "shared/**"
+      - "server/**"
+      - "content/**"
+      - ".github/workflows/dotnet-ci.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "shared/**"
+      - "server/**"
+      - "content/**"
+      - ".github/workflows/dotnet-ci.yml"
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+
+      - name: Locate solution or projects
+        id: locate
+        shell: bash
+        run: |
+          if compgen -G "server/*.sln" > /dev/null; then
+            echo "target=$(ls server/*.sln | head -n 1)" >> "$GITHUB_OUTPUT"
+          elif compgen -G "shared/**/dotnet/*.csproj" > /dev/null; then
+            echo "target=$(ls shared/**/dotnet/*.csproj | head -n 1)" >> "$GITHUB_OUTPUT"
+          else
+            echo "target=" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Restore / Build / Test
+        if: steps.locate.outputs.target != ''
+        run: |
+          dotnet restore "${{ steps.locate.outputs.target }}"
+          dotnet build "${{ steps.locate.outputs.target }}" --no-restore --configuration Release
+          if [[ "${{ steps.locate.outputs.target }}" == *.sln ]]; then
+            dotnet test "${{ steps.locate.outputs.target }}" --no-build --configuration Release --verbosity normal
+          elif compgen -G "shared/**/dotnet/*Tests*.csproj" > /dev/null; then
+            for t in shared/**/dotnet/*Tests*.csproj; do
+              dotnet test "$t" --configuration Release --verbosity normal
+            done
+          fi
+
+      - name: Skip notice
+        if: steps.locate.outputs.target == ''
+        run: echo "No .sln/.csproj found yet; scaffold-only commit."

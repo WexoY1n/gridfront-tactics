@@ -1,0 +1,15 @@
+# Placeholder for v0.6.0 server loop.
+# Planned services: api + postgres
+
+services:
+  postgres:
+    image: postgres:16
+    profiles: ["db"]
+    environment:
+      POSTGRES_USER: gridfront
+      POSTGRES_PASSWORD: gridfront
+      POSTGRES_DB: gridfront
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./docker-data/postgres:/var/lib/postgresql/data
