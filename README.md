@@ -6,7 +6,7 @@ A deterministic grid-based tactical defense vertical slice built with Unity and 
 
 ## Status
 
-当前状态：**v0.1.0 仓库脚手架**（战斗内核与客户端尚未接入）。
+当前状态：**仓库脚手架**（战斗内核与客户端尚未接入）。下一里程碑见 [docs/roadmap.md](docs/roadmap.md) 的 `v0.1.0`。
 
 ## Features（规划）
 
@@ -16,6 +16,19 @@ A deterministic grid-based tactical defense vertical slice built with Unity and 
 - 容量阻挡双向关系
 - 客户端指令日志 + 服务端复盘校验
 - GitHub Actions 自动化测试
+
+## Docs
+
+| Doc | What you get in 30 seconds |
+|---|---|
+| [Product brief](docs/product-brief.md) | 范围、非目标、成功标准 |
+| [Architecture](docs/architecture.md) | 分层、依赖、Tick、共享内核 |
+| [Combat rules](docs/combat-rules.md) | 可测试战斗规则 |
+| [Replay protocol](docs/replay-protocol.md) | Run / 复盘 / 拒绝原因 |
+| [Roadmap](docs/roadmap.md) | `v0.1.0` → `v1.0.0` |
+| [Testing](docs/testing.md) | 测试优先级与 P0 清单 |
+| [Docs index](docs/README.md) | 文档真相顺序 |
+| [Plan archive v1](docs/planning/project-plan-v1.md) | 完整策划快照（历史意图） |
 
 ## Architecture
 
@@ -37,7 +50,7 @@ gridfront-tactics/
 ├─ shared/          # Battle.Core + Contracts
 ├─ server/          # ASP.NET Core API
 ├─ content/         # 导出配置与 Schema
-├─ docs/            # 架构、规则、ADR
+├─ docs/            # 正式文档、ADR、策划归档
 └─ .github/         # Issue/PR 模板与 CI
 ```
 
@@ -51,6 +64,8 @@ docker compose up
 ```
 
 ## Design non-goals
+
+详见 [product brief](docs/product-brief.md)。摘要：
 
 - 不做抽卡、商城、实时 PVP、完整养成
 - 不 1:1 复刻任何商业塔防作品的美术或命名

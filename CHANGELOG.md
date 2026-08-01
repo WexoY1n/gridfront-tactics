@@ -10,3 +10,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Repository skeleton: docs layout, shared/server/client placeholders, GitHub templates.
+- Formal docs split from plan: product brief, architecture, combat rules, replay protocol, roadmap, testing.
+- Archived full plan snapshot at `docs/planning/project-plan-v1.md`.
+- Proposed ADRs 003–005 (A*, command-log replay, no ECS for slice).
