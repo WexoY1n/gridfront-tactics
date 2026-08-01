@@ -29,5 +29,5 @@
 
 ## Current
 
-仓库处于 **脚手架之后、`v0.1.0` 内核验收之前**。  
-下一优先：`BattleRunner` +「同 Seed 1000 Tick Checksum 一致」测试。
+`feat/core-tick-runner` 已落地最小 `BattleRunner` + Canonical Checksum，且 `dotnet test` 覆盖「同 Seed 1000 Tick 一致」。  
+剩余 `v0.1.0`：Unity 圆点 Adapter、合并打 Tag。
