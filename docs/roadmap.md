@@ -29,5 +29,6 @@
 
 ## Current
 
-`feat/core-tick-runner` 已落地最小 `BattleRunner` + Canonical Checksum，且 `dotnet test` 覆盖「同 Seed 1000 Tick 一致」。  
-剩余 `v0.1.0`：Unity 圆点 Adapter、合并打 Tag。
+`v0.1.0` 已发布（Tag `v0.1.0`）。  
+当前分支 `feat/pathfinding` 做 `v0.2.0`：网格 A\*、路径缓存、敌人沿路径移动。Issue：[#3](https://github.com/WexoY1n/gridfront-tactics/issues/3)。  
+剩余：Unity 路径 Debug / 圆点 Adapter、PR 合并、Tag。

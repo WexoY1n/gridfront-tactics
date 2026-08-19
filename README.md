@@ -6,7 +6,7 @@ A deterministic grid-based tactical defense vertical slice built with Unity and 
 
 ## Status
 
-当前状态：**仓库脚手架**（战斗内核与客户端尚未接入）。下一里程碑见 [docs/roadmap.md](docs/roadmap.md) 的 `v0.1.0`。
+当前状态：**v0.1.0 已发布**；`v0.2.0` 正在做网格 A\* 与路径缓存。里程碑见 [docs/roadmap.md](docs/roadmap.md)。
 
 ## Features（规划）
 
@@ -56,11 +56,8 @@ gridfront-tactics/
 
 ## Run / Test
 
-脚手架阶段命令将随 `v0.1.0` 内核落地补充。目标：
-
 ```bash
-dotnet test
-docker compose up
+dotnet test shared/Gridfront.BattleCore.Tests/Gridfront.BattleCore.Tests.csproj -c Release
 ```
 
 ## Design non-goals

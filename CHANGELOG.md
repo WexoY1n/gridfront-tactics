@@ -16,3 +16,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Unity 6 client project with local `battle-core` and MCP package references.
 - `BattleRunner` fixed-tick loop with canonical SHA-256 checksum (`netstandard2.1`).
 - Core determinism tests: identical seed over 1000 ticks; command divergence.
+- Orthogonal A* with stable tie-breaks, path cache, integer `routeProgress`, and path followers.

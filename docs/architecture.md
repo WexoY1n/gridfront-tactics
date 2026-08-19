@@ -110,6 +110,6 @@ ScriptableObject 是编辑工具，不是服务端真相。
 |---|---|---|
 | [ADR-001](adr/ADR-001-pure-csharp-battle-core.md) | 纯 C# 战斗内核 | Accepted |
 | [ADR-002](adr/ADR-002-fixed-tick-and-integer-math.md) | 固定 Tick 与整数数学 | Accepted |
-| [ADR-003](adr/ADR-003-grid-a-star-instead-of-navmesh.md) | 网格 A\* 而非 NavMesh | Proposed |
+| [ADR-003](adr/ADR-003-grid-a-star-instead-of-navmesh.md) | 网格 A\* 而非 NavMesh | Accepted |
 | [ADR-004](adr/ADR-004-command-log-server-replay.md) | 指令日志服务端复盘 | Proposed |
 | [ADR-005](adr/ADR-005-no-ecs-for-vertical-slice.md) | Vertical Slice 不做 ECS | Proposed |
