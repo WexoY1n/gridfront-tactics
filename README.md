@@ -4,6 +4,8 @@ A deterministic grid-based tactical defense vertical slice built with Unity and 
 
 一个基于 Unity 与 ASP.NET Core 的网格战术塔防 Vertical Slice，重点实现 A\* 寻路、稳定索敌、容量阻挡、指令回放验证和自动化测试。
 
+![v0.2.0 path march](docs/media/v0.2.0.gif)
+
 ## Status
 
 当前状态：**v0.1.0 已发布**；`v0.2.0` 内核 A\* 与 Unity 路径演示已在 `feat/pathfinding`。里程碑见 [docs/roadmap.md](docs/roadmap.md)。
