@@ -85,3 +85,7 @@ docker-data/
 *.psd
 *.blend
 *.blend1
+
+# Local Unity editor captures (committed shots live in docs/media)
+client/Assets/Screenshots/
+client/Assets/Screenshots.meta
