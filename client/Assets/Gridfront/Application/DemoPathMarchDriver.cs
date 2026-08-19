@@ -16,6 +16,7 @@ namespace Gridfront.Client.Application
 
         private readonly List<PathFollower> _followers = new List<PathFollower>();
         private float _tickCarry;
+        private bool _clockStarted;
 
         public DemoPathMarchBoard Board { get; private set; }
 
@@ -30,31 +31,52 @@ namespace Gridfront.Client.Application
             Board = DemoPathMarchBoard.Create();
         }
 
+        private void Start()
+        {
+            SpawnNext();
+        }
+
         private void Update()
         {
-            _tickCarry += Time.unscaledDeltaTime;
             var stepSeconds = 1f / TicksPerSecond;
-            while (_tickCarry >= stepSeconds)
+            if (!_clockStarted)
+            {
+                _clockStarted = true;
+                _tickCarry = 0f;
+                return;
+            }
+
+            _tickCarry += Time.unscaledDeltaTime;
+            if (_tickCarry >= stepSeconds)
             {
                 _tickCarry -= stepSeconds;
                 StepOnce();
+                if (_tickCarry >= stepSeconds)
+                {
+                    _tickCarry = 0f;
+                }
             }
         }
 
         private void StepOnce()
         {
-            if (_followers.Count < EnemyCount && Tick % SpawnEveryTicks == 0)
-            {
-                var id = _followers.Count + 1;
-                _followers.Add(new PathFollower(id, Board.Path, SpeedMilliPerTick));
-            }
-
             for (var i = 0; i < _followers.Count; i++)
             {
                 _followers[i].Step();
             }
 
             Tick += 1;
+
+            if (_followers.Count < EnemyCount && Tick % SpawnEveryTicks == 0)
+            {
+                SpawnNext();
+            }
+        }
+
+        private void SpawnNext()
+        {
+            var id = _followers.Count + 1;
+            _followers.Add(new PathFollower(id, Board.Path, SpeedMilliPerTick));
         }
     }
 }
