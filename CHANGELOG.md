@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Deploy legality, facing-relative range cells, stable operator targeting, and a one-hit attack timeline.
+- Unity `Targeting` adapter: deploy pads, facing range, target lock, attack Hit, F3 debug (read-only view).
+- README targeting GIF for the v0.3.0 demo.
+- PathMarch view shares materials and interpolates presentation between ticks.
+
 ## [0.2.0] - 2026-08-20
 
 ### Added

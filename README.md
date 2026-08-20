@@ -4,11 +4,13 @@ A deterministic grid-based tactical defense vertical slice built with Unity and 
 
 一个基于 Unity 与 ASP.NET Core 的网格战术塔防 Vertical Slice，重点实现 A\* 寻路、稳定索敌、容量阻挡、指令回放验证和自动化测试。
 
-![v0.2.0 path march](docs/media/v0.2.0.gif)
+![v0.3.0 targeting](docs/media/v0.3.0.gif)
 
 ## Status
 
-当前状态：**v0.2.0 已发布**（网格 A\*、路径缓存、PathMarch 演示）。下一里程碑见 [docs/roadmap.md](docs/roadmap.md) 的 `v0.3.0`。
+当前状态：**v0.2.0 已发布**；**v0.3.0 开发中**（部署合法性、朝向射程、稳定索敌、攻击时间线）。路线图见 [docs/roadmap.md](docs/roadmap.md)。
+
+![v0.2.0 path march](docs/media/v0.2.0.gif)
 
 ## Features（规划）
 
@@ -48,7 +50,7 @@ flowchart TB
 
 ```text
 gridfront-tactics/
-├─ client/          # Unity 6 客户端（PathMarch 演示场景）
+├─ client/          # Unity 6 客户端（PathMarch / Targeting 演示场景）
 ├─ shared/          # Battle.Core + Contracts
 ├─ server/          # ASP.NET Core API
 ├─ content/         # 导出配置与 Schema
@@ -62,7 +64,9 @@ gridfront-tactics/
 dotnet test shared/Gridfront.BattleCore.Tests/Gridfront.BattleCore.Tests.csproj -c Release
 ```
 
-Unity：用 **6000.5.0f1** 打开 `client/`，播放 `Assets/Gridfront/Scenes/PathMarch.unity`。`F2` 开关路径 Debug。
+Unity：用 **6000.5.0f1** 打开 `client/`。
+- `Assets/Gridfront/Scenes/PathMarch.unity` — `F2` 开关路径 Debug
+- `Assets/Gridfront/Scenes/Targeting.unity` — `F3` 开关索敌/攻击 Debug
 
 ## Design non-goals
 

@@ -13,6 +13,7 @@ namespace Gridfront.Client.Application
         public const int EnemyCount = 20;
         public const int SpawnEveryTicks = 8;
         public const int SpeedMilliPerTick = 200;
+        public const float StepSeconds = 1f / TicksPerSecond;
 
         private readonly List<PathFollower> _followers = new List<PathFollower>();
         private float _tickCarry;
@@ -23,6 +24,8 @@ namespace Gridfront.Client.Application
         public IReadOnlyList<PathFollower> Followers => _followers;
 
         public int Tick { get; private set; }
+
+        public float TickRemainder => _tickCarry;
 
         public bool PathDebugVisible { get; set; } = true;
 
@@ -38,7 +41,6 @@ namespace Gridfront.Client.Application
 
         private void Update()
         {
-            var stepSeconds = 1f / TicksPerSecond;
             if (!_clockStarted)
             {
                 _clockStarted = true;
@@ -47,11 +49,11 @@ namespace Gridfront.Client.Application
             }
 
             _tickCarry += Time.unscaledDeltaTime;
-            if (_tickCarry >= stepSeconds)
+            if (_tickCarry >= StepSeconds)
             {
-                _tickCarry -= stepSeconds;
+                _tickCarry -= StepSeconds;
                 StepOnce();
-                if (_tickCarry >= stepSeconds)
+                if (_tickCarry >= StepSeconds)
                 {
                     _tickCarry = 0f;
                 }
