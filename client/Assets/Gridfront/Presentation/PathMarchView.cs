@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Gridfront.BattleCore.Pathfinding;
 using Gridfront.Client.Application;
@@ -16,10 +15,15 @@ namespace Gridfront.Client.Presentation
         private DemoPathMarchDriver driver;
 
         private readonly List<Transform> _dots = new List<Transform>();
+        private readonly List<Vector3> _from = new List<Vector3>();
+        private readonly List<Vector3> _to = new List<Vector3>();
+        private ViewPalette _palette;
         private Transform _gridRoot;
         private Transform _dotRoot;
         private LineRenderer _pathLine;
-        private Material _lineMaterial;
+        private Material _enemyMaterial;
+        private int _syncedTick = -1;
+        private int _syncedCountSnapshot;
 
         private void Awake()
         {
@@ -36,15 +40,16 @@ namespace Gridfront.Client.Presentation
 
         private void Start()
         {
+            _palette = new ViewPalette();
             BuildGrid();
             BuildPathLine();
         }
 
         private void OnDestroy()
         {
-            if (_lineMaterial != null)
+            if (_palette != null)
             {
-                Destroy(_lineMaterial);
+                _palette.Dispose();
             }
         }
 
@@ -64,7 +69,7 @@ namespace Gridfront.Client.Presentation
 
         private void OnGUI()
         {
-            if (!driver.PathDebugVisible)
+            if (!driver.PathDebugVisible || driver.Board == null)
             {
                 return;
             }
@@ -95,21 +100,22 @@ namespace Gridfront.Client.Presentation
             _gridRoot = new GameObject("Grid").transform;
             _gridRoot.SetParent(transform, false);
             var map = driver.Board.Map;
+            var walkable = _palette.Lit(new Color(0.22f, 0.35f, 0.28f));
+            var blocked = _palette.Lit(new Color(0.18f, 0.12f, 0.12f));
+            var scale = new Vector3(0.92f, 0.08f, 0.92f);
 
             for (var y = 0; y < map.Height; y++)
             {
                 for (var x = 0; x < map.Width; x++)
                 {
                     var pos = new GridPos(x, y);
-                    var tile = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                    tile.name = "Tile_" + x + "_" + y;
-                    tile.transform.SetParent(_gridRoot, false);
-                    tile.transform.position = GridWorld.CellCenter(pos);
-                    tile.transform.localScale = new Vector3(0.92f, 0.08f, 0.92f);
-                    var renderer = tile.GetComponent<MeshRenderer>();
-                    renderer.material.color = map.IsWalkable(pos)
-                        ? new Color(0.22f, 0.35f, 0.28f)
-                        : new Color(0.18f, 0.12f, 0.12f);
+                    ViewPalette.Primitive(
+                        PrimitiveType.Cube,
+                        _gridRoot,
+                        "Tile_" + x + "_" + y,
+                        GridWorld.CellCenter(pos),
+                        scale,
+                        map.IsWalkable(pos) ? walkable : blocked);
                 }
             }
         }
@@ -119,15 +125,7 @@ namespace Gridfront.Client.Presentation
             var lineObject = new GameObject("PathLine");
             lineObject.transform.SetParent(transform, false);
             _pathLine = lineObject.AddComponent<LineRenderer>();
-            var shader = Shader.Find("Sprites/Default");
-            if (shader == null)
-            {
-                throw new InvalidOperationException("Sprites/Default shader is missing; cannot draw path debug.");
-            }
-
-            _lineMaterial = new Material(shader);
-
-            _pathLine.material = _lineMaterial;
+            _pathLine.sharedMaterial = _palette.Unlit(new Color(1f, 0.85f, 0.2f, 1f));
             _pathLine.startColor = new Color(1f, 0.85f, 0.2f, 1f);
             _pathLine.endColor = new Color(1f, 0.45f, 0.1f, 1f);
             _pathLine.startWidth = 0.08f;
@@ -149,31 +147,53 @@ namespace Gridfront.Client.Presentation
             {
                 _dotRoot = new GameObject("Dots").transform;
                 _dotRoot.SetParent(transform, false);
+                _enemyMaterial = _palette.Lit(new Color(0.95f, 0.35f, 0.2f));
             }
 
             var followers = driver.Followers;
             while (_dots.Count < followers.Count)
             {
-                var sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                sphere.name = "Enemy_" + (_dots.Count + 1);
-                sphere.transform.SetParent(_dotRoot, false);
-                sphere.transform.localScale = Vector3.one * 0.35f;
-                var renderer = sphere.GetComponent<MeshRenderer>();
-                renderer.material.color = new Color(0.95f, 0.35f, 0.2f);
-                var collider = sphere.GetComponent<Collider>();
-                if (collider != null)
+                var sphere = ViewPalette.Primitive(
+                    PrimitiveType.Sphere,
+                    _dotRoot,
+                    "Enemy_" + (_dots.Count + 1),
+                    Vector3.zero,
+                    Vector3.one * 0.35f,
+                    _enemyMaterial);
+                _dots.Add(sphere.transform);
+                _from.Add(Vector3.zero);
+                _to.Add(Vector3.zero);
+            }
+
+            if (driver.Tick != _syncedTick)
+            {
+                for (var i = 0; i < followers.Count; i++)
                 {
-                    Destroy(collider);
+                    var current = WorldPos(followers[i]);
+                    if (i >= _to.Count)
+                    {
+                        continue;
+                    }
+
+                    _from[i] = _syncedTick < 0 || i >= _syncedCountSnapshot ? current : _to[i];
+                    _to[i] = current;
                 }
 
-                _dots.Add(sphere.transform);
+                _syncedTick = driver.Tick;
+                _syncedCountSnapshot = followers.Count;
             }
 
+            var t = Mathf.Clamp01(driver.TickRemainder / DemoPathMarchDriver.StepSeconds);
             for (var i = 0; i < followers.Count; i++)
             {
-                followers[i].GetPositionMilli(out var xMilli, out var yMilli);
-                _dots[i].position = GridWorld.FromMilli(xMilli, yMilli, 0.28f);
+                _dots[i].position = Vector3.Lerp(_from[i], _to[i], t);
             }
+        }
+
+        private static Vector3 WorldPos(PathFollower follower)
+        {
+            follower.GetPositionMilli(out var xMilli, out var yMilli);
+            return GridWorld.FromMilli(xMilli, yMilli, 0.28f);
         }
     }
 }

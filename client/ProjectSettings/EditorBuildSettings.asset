@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Gridfront/Scenes/PathMarch.unity
     guid: 4342aed7728cce14790c834561ab2412
+  - enabled: 1
+    path: Assets/Gridfront/Scenes/Targeting.unity
+    guid: b0d10bca769cbf34f80690910be6759e
   m_configObjects: {}
