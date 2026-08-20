@@ -4,9 +4,11 @@ A deterministic grid-based tactical defense vertical slice built with Unity and 
 
 一个基于 Unity 与 ASP.NET Core 的网格战术塔防 Vertical Slice，重点实现 A\* 寻路、稳定索敌、容量阻挡、指令回放验证和自动化测试。
 
+![v0.2.0 path march](docs/media/v0.2.0.gif)
+
 ## Status
 
-当前状态：**仓库脚手架**（战斗内核与客户端尚未接入）。下一里程碑见 [docs/roadmap.md](docs/roadmap.md) 的 `v0.1.0`。
+当前状态：**v0.1.0 已发布**；`v0.2.0` 内核 A\* 与 Unity 路径演示已在 `feat/pathfinding`。里程碑见 [docs/roadmap.md](docs/roadmap.md)。
 
 ## Features（规划）
 
@@ -46,7 +48,7 @@ flowchart TB
 
 ```text
 gridfront-tactics/
-├─ client/          # Unity 客户端（后续接入）
+├─ client/          # Unity 6 客户端（PathMarch 演示场景）
 ├─ shared/          # Battle.Core + Contracts
 ├─ server/          # ASP.NET Core API
 ├─ content/         # 导出配置与 Schema
@@ -56,12 +58,11 @@ gridfront-tactics/
 
 ## Run / Test
 
-脚手架阶段命令将随 `v0.1.0` 内核落地补充。目标：
-
 ```bash
-dotnet test
-docker compose up
+dotnet test shared/Gridfront.BattleCore.Tests/Gridfront.BattleCore.Tests.csproj -c Release
 ```
+
+Unity：用 **6000.5.0f1** 打开 `client/`，播放 `Assets/Gridfront/Scenes/PathMarch.unity`。`F2` 开关路径 Debug。
 
 ## Design non-goals
 

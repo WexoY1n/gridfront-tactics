@@ -33,8 +33,12 @@
 | `g` | 已移动成本；直邻默认 10 |
 | `h` | 曼哈顿距离 × 10 |
 | `f` | `g + h` |
-| Tie-break | 同 `f` 时按 `h`、网格索引 |
+| Tie-break | 同 `f` 时按更小 `h`，再按更小网格索引 `y * width + x` |
 | Diagonal | 禁止 |
+| Neighbor order | `+X`, `-X`, `+Y`, `-Y` |
+| No path | `Found == false` 且节点列表为空；不返回局部假路径 |
+
+`routeProgress` 使用路径折线的整数 milli-units（`1 tile = 1000`）。过拐点时仍单调增加；越出路径长度视为错误。
 
 ### P1 — dynamic replan
 
