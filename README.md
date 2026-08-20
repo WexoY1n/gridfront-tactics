@@ -8,7 +8,7 @@ A deterministic grid-based tactical defense vertical slice built with Unity and 
 
 ## Status
 
-当前状态：**v0.2.0 已发布**；**v0.3.0 开发中**（部署合法性、朝向射程、稳定索敌、攻击时间线）。路线图见 [docs/roadmap.md](docs/roadmap.md)。
+当前状态：**v0.3.0 已发布**（部署合法性、朝向射程、稳定索敌、攻击时间线）。下一里程碑见 [docs/roadmap.md](docs/roadmap.md) 的 `v0.4.0`。
 
 ![v0.2.0 path march](docs/media/v0.2.0.gif)
 

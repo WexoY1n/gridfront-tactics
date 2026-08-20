@@ -29,5 +29,5 @@
 
 ## Current
 
-`v0.2.0` 已发布（Tag `v0.2.0`）。  
-当前分支 `feat/targeting` 做 `v0.3.0`：部署合法性、朝向射程、角色索敌、攻击时间线。Issue：[#5](https://github.com/WexoY1n/gridfront-tactics/issues/5)。
+`v0.3.0` 已发布（Tag `v0.3.0`）。  
+下一里程碑 `v0.4.0`：阻挡容量、双向关系、敌人索敌、死亡/撤退释放。
