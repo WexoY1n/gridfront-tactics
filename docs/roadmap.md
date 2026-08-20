@@ -29,6 +29,5 @@
 
 ## Current
 
-`v0.1.0` 已发布（Tag `v0.1.0`）。  
-`feat/pathfinding` 已有网格 A\*、路径缓存、20 敌人沿路径移动，以及 Unity `PathMarch` 圆点 / F2 Debug。Issue：[#3](https://github.com/WexoY1n/gridfront-tactics/issues/3)。  
-剩余：开 PR、你录一段 GIF（可选，已有截图）、合并后打 Tag `v0.2.0`。
+`v0.2.0` 已发布（Tag `v0.2.0`）。网格 A\*、路径缓存、20 敌人沿路径移动、Unity PathMarch / F2 Debug 已合入 `main`。Issue [#3](https://github.com/WexoY1n/gridfront-tactics/issues/3)。  
+下一里程碑 `v0.3.0`：部署合法性、朝向射程、角色索敌、攻击时间线。

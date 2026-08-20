@@ -8,7 +8,7 @@ A deterministic grid-based tactical defense vertical slice built with Unity and 
 
 ## Status
 
-当前状态：**v0.1.0 已发布**；`v0.2.0` 内核 A\* 与 Unity 路径演示已在 `feat/pathfinding`。里程碑见 [docs/roadmap.md](docs/roadmap.md)。
+当前状态：**v0.2.0 已发布**（网格 A\*、路径缓存、PathMarch 演示）。下一里程碑见 [docs/roadmap.md](docs/roadmap.md) 的 `v0.3.0`。
 
 ## Features（规划）
 
