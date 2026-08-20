@@ -66,7 +66,26 @@ Default sort key:
 (-tauntLevel, -routeProgress, distanceSquared, spawnSequence, entityId)
 ```
 
-目标仍合法时保持锁定；失效后再搜索。
+目标仍合法时保持锁定；失效后再搜索。  
+决胜距离为操作员所在格到候选格的 `dx² + dy²`。
+
+## Facing and range
+
+朝向 `N/E/S/W`。相对格以朝北为作者空间，旋转后再加上部署格：
+
+| Facing | `(x, y)` |
+|---|---|
+| North | `(x, y)` |
+| East | `(y, -x)` |
+| South | `(-x, -y)` |
+| West | `(-y, x)` |
+
+地图外的相对格不进入射程。
+
+## Deploy
+
+近战槽只能放 `MeleePad`；高台槽只能放 `HighPad`。  
+拒绝原因：`OutOfBounds` / `Occupied` / `WrongTile` / `InsufficientCost`。合法部署才扣费。
 
 ## Enemy targeting
 
@@ -102,7 +121,7 @@ EnemyState.IsBlockable
 Idle → AcquireTarget → Windup → HitFrame → Recovery → Idle
 ```
 
-- `WindupTicks` 到点生成伤害事件；动画只消费事件  
+- `WindupTicks` 到点生成一次伤害事件；Windup 中目标失效则取消、不 Hit  
 - 物理 P0：`max(minDamage, attack - defense)`  
 - 法术 P0：`attack × (1 - resistance)`，统一整数舍入  
 - 死亡在 Damage 阶段收集，Cleanup 阶段统一处理  
